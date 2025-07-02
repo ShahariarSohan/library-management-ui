@@ -1,10 +1,11 @@
+import Banner from "@/components/banner/Banner";
 
 
 const AllBooks = () => {
     return (
-        <div>
-            <h1 className="text-3xl font-bold">This all books component</h1>
-        </div>
+      <div>
+        <Banner></Banner>
+      </div>
     );
 };
 
