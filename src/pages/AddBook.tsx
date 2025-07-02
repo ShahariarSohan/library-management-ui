@@ -27,16 +27,20 @@ import { CalendarIcon } from "lucide-react";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import { useAddBookMutation } from "@/redux/apis/bookApi";
 
 const AddBook = () => {
-  const form = useForm();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const [addBook, { data, isLoading }] = useAddBookMutation();
+  console.log("outside",data,isLoading)
+  const form = useForm();
+  const onSubmit: SubmitHandler<FieldValues> =async (data) => {
+    const res = await addBook(data).unwrap();
+    console.log("response",res)
     form.reset();
   };
   return (
-    <div>
+    <div className="p-5 md:p-0">
       <h1 className="text-3xl font-bold text-center my-5">Add Your Book</h1>
       <div className="sm:max-w-[425px] mx-auto p-5 rounded-md border-2 my-10">
         <div className="sr-only">Fill up your form by book details</div>
