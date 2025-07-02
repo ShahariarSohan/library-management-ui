@@ -1,7 +1,10 @@
 import Banner from "@/components/banner/Banner";
 import BookCard from "@/components/book/BookCard";
+import { useGetAllBooksQuery } from "@/redux/apis/bookApi";
 
 const AllBooks = () => {
+  const { data, isLoading } = useGetAllBooksQuery(undefined)
+  console.log(data,isLoading)
   return (
     <div>
       <Banner></Banner>
