@@ -1,6 +1,8 @@
 
+import type { IBook } from "@/interfaces/book.interface";
 import { Eye, Pencil, Trash2, BookOpen } from "lucide-react"; 
-const BookCard = () => {
+const BookCard = ({ title,author,imgUrl }: IBook) => {
+  console.log("Its from book card",title,author)
     return (
       // or use react-icons if preferred
 
@@ -8,17 +10,17 @@ const BookCard = () => {
         {/* Book Image */}
         <img
           className="w-full h-64 object-fill"
-          src="https://i.ibb.co/Tf6Txpw/1984.jpg"
+          src={imgUrl}
           alt="Book Cover"
         />
 
         {/* Book Info */}
         <div className="p-4 text-center">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-            The Alchemist
+            {title}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            by Paulo Coelho
+            by {author}
           </p>
 
           {/* Action Buttons */}

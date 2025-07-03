@@ -3,20 +3,21 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://library-management-system-tau-azure.vercel.app",
+    baseUrl: "http://localhost:5000/books",
   }),
   tagTypes: ["book"],
   endpoints: (build) => ({
     getAllBooks: build.query({
-      query: () => "/api/books",
+      query: () => "/",
       providesTags: ["book"],
     }),
     addBook: build.mutation({
       query: (body) => ({
-        url: "/api/books",
+        url: "/",
         method: "POST",
         body,
       }),
+      invalidatesTags: ["book"],
     }),
   }),
 });

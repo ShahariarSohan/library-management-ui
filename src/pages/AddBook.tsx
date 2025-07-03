@@ -6,13 +6,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -21,24 +17,39 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
 
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
-import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
 import { useAddBookMutation } from "@/redux/apis/bookApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const AddBook = () => {
-
+  const navigate = useNavigate();
   const [addBook, { data, isLoading }] = useAddBookMutation();
-  console.log("outside",data,isLoading)
+  console.log("outside", data, isLoading);
   const form = useForm();
-  const onSubmit: SubmitHandler<FieldValues> =async (data) => {
-    const res = await addBook(data).unwrap();
-    console.log("response",res)
-    form.reset();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log("inside before response", data);
+    const bookData = {
+      ...data,
+      available: true,
+      copies: Number(data.copies),
+    };
+    try {
+      console.log("bookData", bookData);
+      const res = await addBook(bookData).unwrap();
+      console.log("response", res);
+      toast.success("Form Successfully Submitted");
+      form.reset();
+      navigate("/")
+      
+    } catch(error) {
+      toast.error("Form submission failed");
+      console.log("Form catch block",error)
+    }
   };
+
   return (
     <div className="p-5 md:p-0">
       <h1 className="text-3xl font-bold text-center my-5">Add Your Book</h1>
@@ -50,6 +61,7 @@ const AddBook = () => {
             <FormField
               control={form.control}
               name="title"
+              rules={{ required: "Title is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Title</FormLabel>
@@ -60,12 +72,14 @@ const AddBook = () => {
                       value={field.value || ""}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="author"
+              rules={{ required: "Author  is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Author</FormLabel>
@@ -76,12 +90,13 @@ const AddBook = () => {
                       value={field.value || ""}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="imageUrl"
+              name="imgUrl"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>ImageUrl</FormLabel>
@@ -98,6 +113,7 @@ const AddBook = () => {
             <FormField
               control={form.control}
               name="isbn"
+              rules={{ required: "Isbn is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Isbn</FormLabel>
@@ -108,6 +124,7 @@ const AddBook = () => {
                       value={field.value || ""}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -130,6 +147,7 @@ const AddBook = () => {
             <FormField
               control={form.control}
               name="genre"
+              rules={{ required: "Genre is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Genre</FormLabel>
@@ -151,50 +169,28 @@ const AddBook = () => {
                       <SelectItem value="FANTASY">FANTASY</SelectItem>
                     </SelectContent>
                   </Select>
+                  <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="dueDate"
+              name="copies"
+              rules={{ required: "Copies should be a number" }}
               render={({ field }) => (
-                <FormItem className="flex flex-col my-4">
-                  <FormLabel>Due Date</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        // disabled={(date) =>
-                        //   date > new Date() || date < new Date("1900-01-01")
-                        // }
-                        captionLayout="dropdown"
-                      />
-                    </PopoverContent>
-                  </Popover>
+                <FormItem>
+                  <FormLabel>Copies</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="my-2"
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-
             <div className="flex justify-end">
               <Button className="mt-2 bg-gray-500" type="submit">
                 Add Task
