@@ -6,13 +6,14 @@ import toast from "react-hot-toast";
 import UpdateBookDialog from "./UpdateBookDialog";
 import { useState } from "react";
 import BookDetailsDialog from "./BookDetailsDialog";
+import BorrowBookDialog from "./BorrowBookDialog";
 
 
 const BookCard = (book: IBook) => {
-  const [open, setOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
+  const [updateOpen, setUpdateOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
-  const [singleBook,setSingleBook] = useState<IBook | null>(null);
+  const [borrowOpen, setBorrowOpen] = useState(false);
 
   const { title, author, imgUrl, _id }=book
   const [deleteBook]=useDeleteBookMutation()
@@ -31,13 +32,17 @@ const BookCard = (book: IBook) => {
 
   
 
-  const handleOpenUpdateDialog = (book: IBook) => {
+  const handleUpdateDialog = (book: IBook) => {
     setSelectedBook(book);
-    setOpen(true);
+    setUpdateOpen(true);
   };
   const handleViewDialog = (book: IBook) => {
-    setSingleBook(book);
+    setSelectedBook(book);
     setViewOpen(true);
+  };
+  const handleBorrowDialog = (book: IBook) => {
+    setSelectedBook(book);
+    setBorrowOpen(true);
   };
     return (
       // or use react-icons if preferred
@@ -65,7 +70,7 @@ const BookCard = (book: IBook) => {
               <Eye className="w-5 h-5 text-gray-800 dark:text-gray-200" />
             </button>
             <button
-              onClick={() => handleOpenUpdateDialog(book)}
+              onClick={() => handleUpdateDialog(book)}
               title="Edit"
               className="p-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 rounded-md transition"
             >
@@ -79,7 +84,7 @@ const BookCard = (book: IBook) => {
               <Trash2 className="w-5 h-5 text-gray-800 dark:text-gray-200" />
             </button>
             <button
-              title="Borrow"
+              title="Borrow" onClick={()=>handleBorrowDialog(book)}
               className="p-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 rounded-md transition"
             >
               <BookOpen className="w-5 h-5 text-gray-800 dark:text-gray-200" />
@@ -87,15 +92,21 @@ const BookCard = (book: IBook) => {
           </div>
         </div>
         <UpdateBookDialog
-          open={open}
-          onOpenChange={setOpen}
+          open={updateOpen}
+          onOpenChange={setUpdateOpen}
           book={selectedBook}
         />
         <BookDetailsDialog
           open={viewOpen}
           onOpenChange={setViewOpen}
-          book={singleBook}
+          book={selectedBook}
         />
+        <BorrowBookDialog
+          open={borrowOpen}
+          onOpenChange={setBorrowOpen}
+          book={selectedBook}
+        />
+
       </div>
     );
 };
