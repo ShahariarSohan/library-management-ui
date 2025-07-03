@@ -1,5 +1,6 @@
 import type { IBook } from "@/interfaces/book.interface";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   open: boolean;
@@ -19,10 +20,14 @@ const BookDetailsDialog = ({ open, onOpenChange, book }: IProps) => {
               alt="Book Cover"
             />
           </div>
-          <div className="space-y-10">
+          <div className="space-y-2">
             <div className="flex items-center gap-2 ">
               <h3 className="  font-bold text-gray-600">Isbn:</h3>
               <p className="text-gray-600">{book?.isbn}</p>
+            </div>
+            <div className="flex items-center gap-2 ">
+              <h3 className="  font-bold text-gray-600">Genre:</h3>
+              <p className="text-gray-600">{book?.genre}</p>
             </div>
             <div className="flex items-center  gap-2">
               <h3 className="  font-bold text-gray-600">
@@ -32,7 +37,9 @@ const BookDetailsDialog = ({ open, onOpenChange, book }: IProps) => {
             </div>
             <div className="flex items-center  gap-2">
               <h3 className="  font-bold text-gray-600">In Stock:</h3>
-              <p  className="text-gray-600"> {book?.available ? "Available" : "Unavailable"}</p>
+              <p className={cn(
+                book?.available?"text-green-600":"text-red-600"
+              )}> {book?.available ? "Available" : "Unavailable"}</p>
             </div>
           </div>
         </div>
