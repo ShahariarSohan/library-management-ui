@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -32,7 +33,7 @@ interface IProps {
 }
 
 const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
-  console.log(book);
+  console.log(book?._id);
   const form = useForm();
 
   const [updateBook] = useUpdateBookMutation();
@@ -41,13 +42,14 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
     console.log("From field value", data);
     if (!book?._id) return;
     try {
-      await updateBook({
-        id: book._id,
+   const res=   await updateBook({
+        bookId: book._id,
         data: {
           ...data,
           copies: Number(data.copies),
         },
-      }).unwrap();
+   }).unwrap();
+      console.log("From response",res)
       toast.success("Book updated successfully");
       onOpenChange(false);
     } catch {
@@ -57,16 +59,18 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>Update Book</DialogTitle>
         </DialogHeader>
+        <DialogDescription className="sr-only">
+          Update your book
+        </DialogDescription>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name="title"
-              
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Title</FormLabel>
@@ -77,14 +81,12 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
                       value={field.value || ""}
                     />
                   </FormControl>
-                  
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="author"
-              
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Author</FormLabel>
@@ -95,7 +97,6 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
                       value={field.value || ""}
                     />
                   </FormControl>
-                  
                 </FormItem>
               )}
             />

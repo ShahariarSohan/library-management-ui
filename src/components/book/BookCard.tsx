@@ -15,7 +15,6 @@ const BookCard = (book: IBook) => {
   const [singleBook,setSingleBook] = useState<IBook | null>(null);
 
   const { title, author, imgUrl, _id }=book
-  console.log("mongodb Id",_id)
   const [deleteBook]=useDeleteBookMutation()
   const handleDelete = async(_id:string) => {
     try {
@@ -50,7 +49,6 @@ const BookCard = (book: IBook) => {
           src={imgUrl}
           alt="Book Cover"
         />
-
         {/* Book Info */}
         <div className="p-4 text-center">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
