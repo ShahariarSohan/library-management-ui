@@ -46,7 +46,7 @@ const AddBook = () => {
       
     } catch(error) {
       toast.error("Form submission failed");
-      console.log("Form catch block",error)
+      console.log("this is from catch block",error)
     }
   };
 
