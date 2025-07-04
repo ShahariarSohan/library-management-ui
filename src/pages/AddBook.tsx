@@ -193,7 +193,7 @@ const AddBook = () => {
             />
             <div className="flex justify-end">
               <Button className="mt-2 bg-gray-500" type="submit">
-                Add Task
+                Add Book
               </Button>
             </div>
           </form>

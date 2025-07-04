@@ -7,7 +7,7 @@ import UpdateBookDialog from "./UpdateBookDialog";
 import { useState } from "react";
 import BookDetailsDialog from "./BookDetailsDialog";
 import BorrowBookDialog from "./BorrowBookDialog";
-
+import Swal from "sweetalert2";
 
 const BookCard = (book: IBook) => {
   const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
@@ -17,13 +17,28 @@ const BookCard = (book: IBook) => {
 
   const { title, author, imgUrl, _id }=book
   const [deleteBook]=useDeleteBookMutation()
-  const handleDelete = async(_id:string) => {
+  const handleDelete = async (_id: string) => {
+    
     try {
-      
-      const res = await deleteBook(_id).unwrap();
-      console.log("response", res);
-      toast.success("Book Deleted Successfully ");
-     
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          const res = await deleteBook(_id).unwrap();
+          console.log("response", res);          
+          Swal.fire({
+            title: "Deleted!",
+            text: "Book has been deleted.",
+            icon: "success",
+          });
+        }
+      });     
     } catch (error) {
       toast.error("Book Deletion Failed");
       console.log("Form catch block", error);
@@ -99,7 +114,7 @@ const BookCard = (book: IBook) => {
         <BookDetailsDialog
           open={viewOpen}
           onOpenChange={setViewOpen}
-          book={selectedBook}
+          bookId={_id!}
         />
         <BorrowBookDialog
           open={borrowOpen}

@@ -3,16 +3,26 @@ import type { IBorrowSummary } from "@/interfaces/borrowSummary.interface";
 import { useGetBorrowedBooksQuery } from "@/redux/apis/borrowApi";
 import { BeatLoader } from "react-spinners";
 
-
+interface IProps{
+  book: IBorrowSummary,
+  totalQuantity:number
+}
 
 const BorrowSummary = () => {
     const { data,isLoading,isError } = useGetBorrowedBooksQuery(undefined)
   const borrowedBooks = data?.data || [];
+
+  if (isError)
+    return (
+      <h1 className="text-xl font-bold text-red-500 text-center my-5">
+        Something went wrong ...
+      </h1>
+    );
   console.log(borrowedBooks)
     return (
       <div className="container mx-auto">
         <h1 className="text-2xl font-bold text-center">
-          Borrowed Book Summary{" "}
+          Borrowed Book Summary
         </h1>
         {isLoading && (
           <div className="flex items-center justify-center">
@@ -38,7 +48,7 @@ const BorrowSummary = () => {
               <tbody className="bg-white divide-y divide-gray-100">
                 {(!isLoading &&
                   !isError) &&
-                  borrowedBooks?.map((book: IBorrowSummary, index: number) => (
+                  borrowedBooks?.map((book: IProps, index: number) => (
                     <tr key={index} className="hover:bg-gray-50 transition">
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
                         {book?.book?.title}

@@ -6,13 +6,12 @@ import { useGetAllBooksQuery } from "@/redux/apis/bookApi";
 import { BeatLoader } from "react-spinners";
 const AllBooks = () => {
   const { data, isLoading, isError } = useGetAllBooksQuery(undefined);
-  const books = data?.data ||[];
+  const books = data?.data || [];
 
-  
   if (isError)
     return (
-      <h1 className="text-3xl font-bold text-red-500">
-        Something went wrong loading books.
+      <h1 className="text-xl font-bold text-red-500 text-center my-5">
+        Something went wrong ....
       </h1>
     );
   return (

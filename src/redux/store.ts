@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { bookApi } from "./apis/bookApi";
 import { borrowApi } from "./apis/borrowApi";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
   reducer: {
@@ -8,11 +9,12 @@ export const store = configureStore({
     [borrowApi.reducerPath]: borrowApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(bookApi.middleware).concat(borrowApi.middleware),
-  
+    getDefaultMiddleware()
+      .concat(bookApi.middleware)
+      .concat(borrowApi.middleware),
 });
-
 
 export type RootState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+setupListeners(store.dispatch);

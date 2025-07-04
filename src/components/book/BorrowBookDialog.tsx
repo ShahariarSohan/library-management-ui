@@ -12,6 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
@@ -50,8 +51,9 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
       console.log("From response", res);
       toast.success("Book Borrowed successfully");
       onOpenChange(false);
+      form.reset()
     } catch {
-      toast.error("Failed to Borrow book");
+      toast.error("Book Copies not available");
     }
   };
 
@@ -69,6 +71,7 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
             <FormField
               control={form.control}
               name="quantity"
+              rules={{ required: "Quantity is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Quantity</FormLabel>
@@ -79,12 +82,14 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
                       value={field.value || ""}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="dueDate"
+              rules={{ required: "Due date is required" }}
               render={({ field }) => (
                 <FormItem className="flex flex-col my-4">
                   <FormLabel>Due Date</FormLabel>
@@ -119,6 +124,7 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
                       />
                     </PopoverContent>
                   </Popover>
+                  <FormMessage/>
                 </FormItem>
               )}
             />
