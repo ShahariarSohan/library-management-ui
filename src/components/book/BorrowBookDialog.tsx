@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "../ui/calendar";
 import { useBorrowBookMutation } from "@/redux/apis/borrowApi";
 import { format } from "date-fns";
+import { useNavigate } from "react-router";
 
 interface IProps {
   open: boolean;
@@ -32,6 +33,7 @@ interface IProps {
 }
 
 const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
+  const navigate = useNavigate();
   console.log(book?._id);
   const form = useForm();
 
@@ -52,6 +54,8 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
       toast.success("Book Borrowed successfully");
       onOpenChange(false);
       form.reset()
+      navigate("/borrow-summary")
+
     } catch {
       toast.error("Book Copies not available");
     }
