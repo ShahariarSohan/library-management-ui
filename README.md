@@ -11,7 +11,7 @@ This is a library management UI very simple and minimalistic UI.Where user can s
 - User can delete and update books.
 - User can borrow books.
 - User can also see borrowed book summary .
-- React, Redux Toolkit Query (RTK Query), and TypeScript are added.
+- React, Redux Toolkit Query (RTK Query), and TypeScript technologies are used.
 - Some modal and Tailwind CSS component library added.
 
 
