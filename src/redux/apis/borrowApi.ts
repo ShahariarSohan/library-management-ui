@@ -5,11 +5,11 @@ export const borrowApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/borrow",
   }),
-  tagTypes: ["borrow", "Books", "Book"], 
+  tagTypes: ["borrow"], 
   endpoints: (build) => ({
     getBorrowedBooks: build.query({
       query: () => "/",
-      providesTags: [{ type: "borrow" }],
+      providesTags: ["borrow"],
     }),
 
     borrowBook: build.mutation({
@@ -18,11 +18,7 @@ export const borrowApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ( arg) => [
-        { type: "borrow" as const },
-        { type: "Books" as const },
-        ...(arg?.book ? [{ type: "Book" as const, id: arg.book }] : []),
-      ],
+      invalidatesTags:["borrow"],
     }),
   }),
 });

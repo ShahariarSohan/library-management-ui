@@ -5,62 +5,41 @@ export const bookApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/books",
   }),
-  tagTypes: ["Book", "Books"], 
+  tagTypes: ["book"],
   endpoints: (build) => ({
-    
     getAllBooks: build.query({
       query: () => "/",
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.data.map((book: { _id: string }) => ({
-                type: "Book" as const,
-                id: book._id,
-              })),
-              { type: "Books" },
-            ]
-          : [{ type: "Books" }],
+      providesTags: ["book"],
     }),
-
-    
     getSingleBook: build.query({
       query: (bookId) => `/${bookId}`,
-      providesTags: ( bookId) => [{ type: "Book", id: bookId }],
+      providesTags: ["book"],
     }),
 
-   
     addBook: build.mutation({
       query: (body) => ({
         url: "/",
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Books" }],
+      invalidatesTags: ["book"],
     }),
 
-    
     updateBook: build.mutation({
       query: ({ bookId, data }) => ({
         url: `/${bookId}`,
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ( { bookId }) => [
-        { type: "Book", id: bookId },
-        { type: "Books" },
-      ],
+      invalidatesTags: ["book"],
     }),
 
-   
     deleteBook: build.mutation({
       query: (bookId) => ({
         url: `/${bookId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ( bookId) => [
-        { type: "Book", id: bookId },
-        { type: "Books" },
-      ],
+      invalidatesTags: ["book"],
     }),
   }),
 });
