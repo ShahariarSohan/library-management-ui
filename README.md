@@ -32,7 +32,7 @@ Some software you may not need to install but it is always safe to install all r
 
 #### Website link given below:
 
-- [https://vercel.com/shahariarsohans-projects/library-management-ui](https://vercel.com/shahariarsohans-projects/library-management-ui)
+- [https://library-management-ui-zeta.vercel.app/](https://library-management-ui-zeta.vercel.app/)
 - Clone repo from going there .
 
 #### Use command
