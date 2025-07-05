@@ -22,16 +22,11 @@ const BorrowSummary = () => {
       <BeatLoader color="#4B5563" size={10} />
     </div>;
   }
-  if (borrowedBooks.length === 0) {
-    return (
-      <h1 className="text-xl font-bold text-red-500 text-center my-10 md:my-52">
-      No Book Summary Available...
-    </h1>
-    )
-  }
+
   return (
     <div className="container mx-auto">
-      <h1 className="text-2xl font-bold text-center">Borrowed Book Summary</h1> 
+      <h1 className="text-2xl font-bold text-center">Borrowed Book Summary</h1>
+      {}
       <div className="overflow-x-auto mt-10 p-4">
         <div className="min-w-full bg-white rounded-md shadow-md overflow-hidden mb-10">
           <table className="min-w-full divide-y divide-gray-200">
