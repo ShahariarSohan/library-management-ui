@@ -28,7 +28,7 @@ const AllBooks = () => {
         Discover Your Next Books
       </h1>
       {isLoading && (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center my-5">
           <BeatLoader color="#4B5563" size={10} />
         </div>
       )}
