@@ -19,7 +19,7 @@ const BorrowSummary = () => {
     );
   if (borrowedBooks.length === 0) {
     return (
-      <h1 className="text-xl font-bold text-red-500 text-center my-5">
+      <h1 className="text-xl font-bold text-red-500 text-center my-52">
       No Book Summary Available...
     </h1>
     )
