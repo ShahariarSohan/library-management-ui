@@ -16,15 +16,10 @@ const BorrowSummary = () => {
       <h1 className="text-xl font-bold text-red-500 text-center my-5">
         Something went wrong ...
       </h1>
-    );
-  if (isLoading) {
-    <div className="flex items-center justify-center">
-      <BeatLoader color="#4B5563" size={10} />
-    </div>;
-  }
+    )
   if (!isLoading && borrowedBooks.length === 0) {
     return (
-      <h1 className="text-xl font-bold text-gray-600 text-center my-5 md:my-52">
+      <h1 className="text-xl font-bold text-red-500 text-center my-5 md:my-52">
        No Books Borrowed ....
       </h1>
     );
@@ -32,7 +27,11 @@ const BorrowSummary = () => {
   return (
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold text-center">Borrowed Book Summary</h1>
-      
+      {isLoading && (
+        <div className="flex items-center justify-center">
+          <BeatLoader color="#4B5563" size={10} />
+        </div>
+      )}
       <div className="overflow-x-auto mt-10 p-4">
         <div className="min-w-full bg-white rounded-md shadow-md overflow-hidden mb-10">
           <table className="min-w-full divide-y divide-gray-200">
@@ -50,7 +49,8 @@ const BorrowSummary = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-100">
-              {(!isLoading && borrowedBooks.length>0) &&
+              {!isLoading &&
+                borrowedBooks.length > 0 &&
                 borrowedBooks?.map((book: IProps, index: number) => (
                   <tr key={index} className="hover:bg-gray-50 transition">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
