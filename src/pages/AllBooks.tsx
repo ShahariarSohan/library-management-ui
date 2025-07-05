@@ -16,7 +16,7 @@ const AllBooks = () => {
     );
     if (books.length === 0) {
       return (
-        <h1 className="text-xl font-bold text-red-500 text-center my-52">
+        <h1 className="text-xl font-bold text-red-500 text-center my-10 md:my-52">
           No Books Available...
         </h1>
       );
