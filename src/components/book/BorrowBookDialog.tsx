@@ -49,7 +49,7 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
       };
      
     try {
-      if ( borrowData.quantity<book?.copies) {
+      if ( borrowData.quantity<=book?.copies) {
         await borrowBook(borrowData).unwrap();
         toast.success("Book Borrowed successfully");
         onOpenChange(false);
