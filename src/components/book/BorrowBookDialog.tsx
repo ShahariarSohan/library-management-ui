@@ -34,23 +34,23 @@ interface IProps {
 
 const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
   const navigate = useNavigate();
-  (book?._id);
+  
   const form = useForm();
 
   const [borrowBook] = useBorrowBookMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    rom field value", data);
+    
       if (!book?._id) return;
       const borrowData = {
         book: book._id,
         dueDate: data.dueDate,
         quantity: Number(data.quantity),
       };
-     borrowData",borrowData)
+     
     try {
-      const res = await borrowBook(borrowData).unwrap();
-      rom response", res);
+       await borrowBook(borrowData).unwrap();
+      
       toast.success("Book Borrowed successfully");
       onOpenChange(false);
       form.reset()
@@ -121,9 +121,6 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        // disabled={(date) =>
-                        //   date > new Date() || date < new Date("1900-01-01")
-                        // }
                         captionLayout="dropdown"
                       />
                     </PopoverContent>
