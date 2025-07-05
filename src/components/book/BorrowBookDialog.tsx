@@ -57,7 +57,7 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
       navigate("/borrow-summary")
 
     } catch {
-      toast.error("Book Copies not available");
+      toast.error("Your given copies not available");
     }
   };
 
