@@ -34,23 +34,23 @@ interface IProps {
 
 const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
   const navigate = useNavigate();
-  console.log(book?._id);
+  (book?._id);
   const form = useForm();
 
   const [borrowBook] = useBorrowBookMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("From field value", data);
+    rom field value", data);
       if (!book?._id) return;
       const borrowData = {
         book: book._id,
         dueDate: data.dueDate,
         quantity: Number(data.quantity),
       };
-     console.log("borrowData",borrowData)
+     borrowData",borrowData)
     try {
       const res = await borrowBook(borrowData).unwrap();
-      console.log("From response", res);
+      rom response", res);
       toast.success("Book Borrowed successfully");
       onOpenChange(false);
       form.reset()

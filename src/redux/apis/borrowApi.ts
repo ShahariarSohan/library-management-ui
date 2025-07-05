@@ -3,9 +3,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const borrowApi = createApi({
   reducerPath: "borrowApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/borrow",
+    baseUrl: "https://library-management-system-tau-azure.vercel.app/borrow",
   }),
-  tagTypes: ["borrow"], 
+  tagTypes: ["borrow"],
   endpoints: (build) => ({
     getBorrowedBooks: build.query({
       query: () => "/",
@@ -18,7 +18,7 @@ export const borrowApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags:["borrow"],
+      invalidatesTags: ["borrow"],
     }),
   }),
 });

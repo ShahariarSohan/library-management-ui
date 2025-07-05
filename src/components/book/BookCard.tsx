@@ -31,7 +31,7 @@ const BookCard = (book: IBook) => {
       }).then(async(result) => {
         if (result.isConfirmed) {
           const res = await deleteBook(_id).unwrap();
-          console.log("response", res);          
+          esponse", res);          
           Swal.fire({
             title: "Deleted!",
             text: "Book has been deleted.",
@@ -41,7 +41,7 @@ const BookCard = (book: IBook) => {
       });     
     } catch (error) {
       toast.error("Book Deletion Failed");
-      console.log("Form catch block", error);
+      orm catch block", error);
     }
   }
 

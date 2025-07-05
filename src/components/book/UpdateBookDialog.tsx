@@ -33,13 +33,13 @@ interface IProps {
 }
 
 const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
-  console.log(book?._id);
+  (book?._id);
   const form = useForm();
 
   const [updateBook] = useUpdateBookMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("From field value", data);
+    rom field value", data);
     if (!book?._id) return;
     try {
    const res=   await updateBook({
@@ -49,7 +49,7 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
           copies: Number(data.copies),
         },
    }).unwrap();
-      console.log("From response",res)
+      rom response",res)
       toast.success("Book updated successfully");
       onOpenChange(false);
     } catch {

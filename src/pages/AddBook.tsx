@@ -26,27 +26,27 @@ import { useNavigate } from "react-router";
 const AddBook = () => {
   const navigate = useNavigate();
   const [addBook, { data, isLoading }] = useAddBookMutation();
-  console.log("outside", data, isLoading);
+  outside", data, isLoading);
   const form = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("inside before response", data);
+    inside before response", data);
     const bookData = {
       ...data,
       available: true,
       copies: Number(data.copies),
     };
     try {
-      console.log("bookData", bookData);
+      bookData", bookData);
       const res = await addBook(bookData).unwrap();
-      console.log("response", res);
+      esponse", res);
       toast.success("Form Successfully Submitted");
       form.reset();
       navigate("/")
       
     } catch(error) {
       toast.error("Form submission failed");
-      console.log("this is from catch block",error)
+      this is from catch block",error)
     }
   };
 
