@@ -24,7 +24,7 @@ const BorrowSummary = () => {
   }
   if (!isLoading && borrowedBooks.length === 0) {
     return (
-      <h1 className="text-xl font-bold text-red-500 text-center my-5 md:my-52">
+      <h1 className="text-xl font-bold text-gray-600 text-center my-5 md:my-52">
        No Books Borrowed ....
       </h1>
     );
