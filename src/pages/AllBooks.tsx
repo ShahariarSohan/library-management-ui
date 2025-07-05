@@ -2,10 +2,15 @@ import Banner from "@/components/banner/Banner";
 import BookCard from "@/components/book/BookCard";
 import type { IBook } from "@/interfaces/book.interface";
 import { useGetAllBooksQuery } from "@/redux/apis/bookApi";
+import { useEffect } from "react";
 
 import { BeatLoader } from "react-spinners";
 const AllBooks = () => {
-  const { data, isLoading, isError } = useGetAllBooksQuery(undefined);
+  const { data, isLoading, isError, refetch } = useGetAllBooksQuery(undefined);
+  useEffect(() => {
+    refetch(); // re-fetches latest books when the component mounts
+  }, []);
+  
   const books = data?.data || [];
 
   if (isError)
