@@ -32,26 +32,25 @@ const BorrowSummary = () => {
           <BeatLoader color="#4B5563" size={10} />
         </div>
       )}
-      <div className="overflow-x-auto mt-10 p-4">
-        <div className="min-w-full bg-white rounded-md shadow-md overflow-hidden mb-10">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-800">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-medium text-white tracking-wider">
-                  Book Title
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-white tracking-wider">
-                  ISBN
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-white tracking-wider">
-                  Total Quantity
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-100">
-              {!isLoading &&
-                borrowedBooks.length > 0 &&
-                borrowedBooks?.map((book: IProps, index: number) => (
+      {!isLoading && borrowedBooks.length > 0 && (
+        <div className="overflow-x-auto mt-10 p-4">
+          <div className="min-w-full bg-white rounded-md shadow-md overflow-hidden mb-10">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-800">
+                <tr>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-white tracking-wider">
+                    Book Title
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-white tracking-wider">
+                    ISBN
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-white tracking-wider">
+                    Total Quantity
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-100">
+                {borrowedBooks?.map((book: IProps, index: number) => (
                   <tr key={index} className="hover:bg-gray-50 transition">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
                       {book?.book?.title}
@@ -64,10 +63,11 @@ const BorrowSummary = () => {
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
