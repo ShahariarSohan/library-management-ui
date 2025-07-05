@@ -11,7 +11,7 @@ interface IProps {
 const BookDetailsDialog = ({ open, onOpenChange, bookId }: IProps) => {
   const { data } = useGetSingleBookQuery(bookId);
   const book = data?.data || "";
-  book;
+  
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="flex flex-col justify-center  ">

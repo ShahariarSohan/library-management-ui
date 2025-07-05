@@ -17,7 +17,13 @@ const BorrowSummary = () => {
         Something went wrong ...
       </h1>
     );
-  borrowedBooks;
+  if (borrowedBooks.length === 0) {
+    return (
+      <h1 className="text-xl font-bold text-red-500 text-center my-5">
+      No Book Summary Available...
+    </h1>
+    )
+  }
   return (
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold text-center">Borrowed Book Summary</h1>
