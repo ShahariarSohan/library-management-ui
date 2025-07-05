@@ -5,11 +5,11 @@ export const borrowApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://library-management-system-tau-azure.vercel.app/borrow",
   }),
-  tagTypes: ["borrow"],
+  tagTypes: ["borrow","book"],
   endpoints: (build) => ({
     getBorrowedBooks: build.query({
       query: () => "/",
-      providesTags: ["borrow"],
+      providesTags: ["borrow","book"],
     }),
 
     borrowBook: build.mutation({
@@ -18,7 +18,7 @@ export const borrowApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["borrow"],
+      invalidatesTags: ["borrow","book"],
     }),
   }),
 });
