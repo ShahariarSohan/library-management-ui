@@ -49,15 +49,19 @@ const UpdateBookDialog = ({ open, onOpenChange, book }: IProps) => {
       };
      
     try {
-       await borrowBook(borrowData).unwrap();
-      
-      toast.success("Book Borrowed successfully");
-      onOpenChange(false);
-      form.reset()
-      navigate("/borrow-summary")
+      if ( borrowData.quantity<book?.copies) {
+        await borrowBook(borrowData).unwrap();
+        toast.success("Book Borrowed successfully");
+        onOpenChange(false);
+        form.reset();
+        navigate("/borrow-summary");
+       }
+      else {
+        toast.error("Your given copies not available");
+       }
 
     } catch {
-      toast.error("Your given copies not available");
+      console.error("There is an error")
     }
   };
 
