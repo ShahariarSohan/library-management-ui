@@ -14,11 +14,18 @@ const AllBooks = () => {
         Something went wrong ....
       </h1>
     );
-   if (isLoading) {
-      <div className="flex items-center justify-center">
-        <BeatLoader color="#4B5563" size={10} />
-      </div>;
-    }
+  if (isLoading) {
+    <div className="flex items-center justify-center">
+      <BeatLoader color="#4B5563" size={10} />
+    </div>;
+  } 
+  if (!isLoading && books.length === 0) {
+    return (
+      <h1 className="text-xl font-bold text-red-500 text-center my-5 md:my-52">
+        No Books Available ....
+      </h1>
+    );
+  }
   return (
     <div>
       <Banner></Banner>
@@ -26,7 +33,8 @@ const AllBooks = () => {
         Discover Your Next Books
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-5 my-5">
-        {!isLoading &&
+        {(!isLoading &&
+          books.length > 0) &&
           books?.map((book: IBook, idx: number) => (
             <BookCard key={idx} {...book}></BookCard>
           ))}

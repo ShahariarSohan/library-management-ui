@@ -22,7 +22,13 @@ const BorrowSummary = () => {
       <BeatLoader color="#4B5563" size={10} />
     </div>;
   }
-
+  if (!isLoading && borrowedBooks.length === 0) {
+    return (
+      <h1 className="text-xl font-bold text-red-500 text-center my-5 md:my-52">
+       No Books Borrowed ....
+      </h1>
+    );
+  }
   return (
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold text-center">Borrowed Book Summary</h1>
@@ -44,7 +50,7 @@ const BorrowSummary = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-100">
-              {!isLoading &&
+              {(!isLoading && borrowedBooks.length>0) &&
                 borrowedBooks?.map((book: IProps, index: number) => (
                   <tr key={index} className="hover:bg-gray-50 transition">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
