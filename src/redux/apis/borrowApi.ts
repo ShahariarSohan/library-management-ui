@@ -9,7 +9,7 @@ export const borrowApi = createApi({
   endpoints: (build) => ({
     getBorrowedBooks: build.query({
       query: () => "/",
-      providesTags: ["borrow","book"],
+      providesTags: ["borrow"],
     }),
 
     borrowBook: build.mutation({
