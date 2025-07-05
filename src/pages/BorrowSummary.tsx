@@ -27,11 +27,13 @@ const BorrowSummary = () => {
   return (
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold text-center">Borrowed Book Summary</h1>
-      {isLoading && (
-        <div className="flex items-center justify-center my-5">
-          <BeatLoader color="#4B5563" size={10} />
-        </div>
-      )}
+      <div>
+        {isLoading && (
+          <div className="flex items-center justify-center my-5">
+            <BeatLoader color="#4B5563" size={10} />
+          </div>
+        )}
+      </div>
       {!isLoading && borrowedBooks.length > 0 && (
         <div className="overflow-x-auto mt-10 p-4">
           <div className="min-w-full bg-white rounded-md shadow-md overflow-hidden mb-10">
